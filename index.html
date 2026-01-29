@@ -1,830 +1,1030 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>SB WORKFLOW – Portfolio & Client Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB WORKFLOW COMPANY | Premium Creative Studio</title>
+  <meta name="description" content="Premium creative studio delivering world-class editing, animation, and design solutions for modern brands and creators.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg-dark:#050712;
-      --bg-card:#0c1020;
-      --accent:#a855f7;
-      --accent-soft:rgba(168,85,247,0.35);
-      --accent-strong:#7c3aed;
-      --text-main:#f9fafb;
-      --text-muted:#9ca3af;
-      --border-subtle:rgba(148,163,184,0.25);
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Poppins',sans-serif;
-      background:var(--bg-dark);
-      color:var(--text-main);
-      overflow-x:hidden;
+    :root {
+      --background: 0 0% 0%;
+      --foreground: 0 0% 98%;
+      --muted: 0 0% 10%;
+      --muted-foreground: 0 0% 55%;
+      --border: 0 0% 15%;
+      --chrome: 0 0% 75%;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
-
-    .animated-bg{
-      position:fixed;inset:0;z-index:-3;
-      background:linear-gradient(300deg,#020617,#020617,#111827,#1e1b4b,#020617);
-      background-size:220% 220%;
-      animation:gradientMove 26s ease-in-out infinite;
+    html {
+      scroll-behavior: smooth;
     }
-    @keyframes gradientMove{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
     }
-
-    .bg-orbit{
-      position:fixed;inset:0;overflow:hidden;z-index:-2;
-      background:radial-gradient(circle at 10% 0%,#111827 0,transparent 55%),
-                  radial-gradient(circle at 90% 100%,#020617 0,transparent 55%);
+    .font-display {
+      font-family: 'Playfair Display', Georgia, serif;
     }
-    .blob{
-      position:absolute;border-radius:999px;filter:blur(40px);opacity:0.6;
-      background:conic-gradient(from 200deg at 50% 50%,#1f2937,#4c1d95,#a855f7,#020617);
-      animation:blobMove 18s ease-in-out infinite alternate;
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, hsl(var(--background)), transparent);
     }
-    .blob.blob-1{width:380px;height:380px;top:-120px;left:-80px;}
-    .blob.blob-2{width:420px;height:420px;bottom:-160px;right:-120px;animation-delay:5s;}
-    @keyframes blobMove{
-      0%{transform:translate3d(0,0,0) scale(1);}
-      50%{transform:translate3d(40px,-30px,0) scale(1.08);}
-      100%{transform:translate3d(-30px,40px,0) scale(1.03);}
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
-
-    .glass{
-      background:linear-gradient(135deg,rgba(15,23,42,0.96),rgba(15,23,42,0.8));
-      border:1px solid var(--border-subtle);
-      box-shadow:0 22px 50px rgba(15,23,42,0.9);
-      backdrop-filter:blur(20px);
+    .logo-img {
+      height: 2.5rem;
+      width: auto;
+      border-radius: 0.5rem;
     }
-
-    .page-wrap{min-height:100vh;display:flex;flex-direction:column;}
-    main{flex:1;}
-
-    nav{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter:blur(18px);
-      background:linear-gradient(to bottom,rgba(3,7,18,0.98),rgba(3,7,18,0.9));
-      border-bottom:1px solid rgba(148,163,184,0.35);
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--chrome)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .nav-inner{
-      max-width:1200px;margin:0 auto;padding:14px 20px;
-      display:flex;align-items:center;justify-content:space-between;
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      list-style: none;
     }
-    .logo-link{
-      display:flex;align-items:center;gap:10px;
-      text-decoration:none;color:var(--text-main);
-      cursor:pointer;
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
     }
-    .logo-icon-wrap{
-      width:42px;
-      height:42px;
-      border-radius:999px;
-      border:2px solid var(--accent);
-      box-shadow:0 0 22px var(--accent-soft);
-      background:radial-gradient(circle at 30% 0,#f9fafb,#1f2937);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-      /* rotation removed: no animation here */
+    .nav-link {
+      color: hsl(var(--muted-foreground));
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      cursor: pointer;
     }
-    .logo-icon-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      display:block;
+    .nav-link:hover,
+    .nav-link.active {
+      color: hsl(var(--foreground));
     }
-    .logo-text{
-      font-weight:700;
-      font-size:18px;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
+    /* Slide Navigation */
+    .slide-nav {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
     }
-
-    .nav-links{display:flex;gap:18px;font-size:13px;}
-    .nav-links button{
-      background:none;border:none;color:var(--text-muted);cursor:pointer;
-      position:relative;padding:6px 2px;font-weight:400;
-      text-transform:uppercase;letter-spacing:0.14em;
+    @media (min-width: 1024px) {
+      .slide-nav {
+        display: flex;
+      }
     }
-    .nav-links button span{transition:color .25s ease;}
-    .nav-links button::after{
-      content:'';position:absolute;left:0;bottom:-4px;height:2px;width:0;
-      background:linear-gradient(90deg,#f9fafb,var(--accent));
-      border-radius:999px;
-      transition:width .25s ease;
+    .slide-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
     }
-    .nav-links button.active span{color:var(--accent);}
-    .nav-links button.active::after{width:100%;}
-    .nav-cta{display:flex;align-items:center;gap:12px;}
-    .pill-status{
-      padding:4px 10px;border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      font-size:11px;text-transform:uppercase;letter-spacing:0.12em;
-      color:#e5e7eb;
+    .slide-nav-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: hsl(var(--muted-foreground));
+      opacity: 0;
+      transition: opacity 0.3s;
     }
-    .btn-outline{
-      padding:7px 16px;border-radius:999px;border:1px solid var(--accent);
-      background:rgba(15,23,42,0.8);color:var(--accent);font-size:12px;
-      cursor:pointer;display:flex;align-items:center;gap:6px;
-      transition:all .25s ease;
+    .slide-nav-item:hover .slide-nav-label,
+    .slide-nav-item.active .slide-nav-label {
+      opacity: 1;
     }
-    .btn-outline:hover{
-      background:var(--accent);
-      color:#020617;
-      box-shadow:0 0 26px var(--accent-soft);
-      transform:translateY(-1px);
+    .slide-nav-item.active .slide-nav-label {
+      color: hsl(var(--foreground));
     }
-
-    main{max-width:1200px;margin:0 auto;padding:40px 20px 70px;}
-    .page{display:none;animation:fadeIn .5s ease forwards;}
-    .page.active{display:block;}
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px);}
-      to{opacity:1;transform:translateY(0);}
+    .slide-nav-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 9999px;
+      background: hsl(var(--muted-foreground) / 0.5);
+      transition: all 0.3s;
     }
-
-    .hero-grid{
-      display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2.3fr);
-      gap:40px;align-items:center;margin-top:40px;
+    .slide-nav-item:hover .slide-nav-dot {
+      background: hsl(var(--muted-foreground));
     }
-    .hero-kicker{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:4px 10px;border-radius:999px;
-      border:1px solid rgba(148,163,184,0.7);
-      background:rgba(15,23,42,0.95);
-      font-size:11px;text-transform:uppercase;letter-spacing:0.16em;
-      margin-bottom:18px;color:var(--text-muted);
+    .slide-nav-item.active .slide-nav-dot {
+      width: 2rem;
+      background: hsl(var(--foreground));
     }
-    .hero-kicker span.badge{
-      padding:3px 8px;border-radius:999px;
-      background:rgba(37,99,235,0.6);
-      color:#e5edff;font-size:10px;
+    /* Mobile Slide Indicator */
+    .mobile-indicator {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 50;
     }
-    h1{
-      font-size:40px;line-height:1.15;margin-bottom:12px;
-      background:linear-gradient(120deg,#f9fafb,#e5e7eb,#a855f7);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      text-shadow:0 0 32px rgba(15,23,42,1);
+    @media (min-width: 1024px) {
+      .mobile-indicator {
+        display: none;
+      }
     }
-    .hero-sub{
-      font-size:14px;color:var(--text-muted);max-width:520px;margin-bottom:22px;
+    .mobile-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 9999px;
+      background: hsl(var(--muted-foreground) / 0.5);
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
     }
-    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:24px;}
-    .btn-primary{
-      border:none;border-radius:999px;
-      background:radial-gradient(circle at 20% 0,#e0f2fe,#3b82f6);
-      color:#020617;
-      padding:10px 20px;font-size:13px;font-weight:600;
-      display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-      box-shadow:0 20px 44px rgba(37,99,235,0.65);
-      transition:all .23s ease;
+    .mobile-dot.active {
+      width: 1.5rem;
+      background: hsl(var(--foreground));
     }
-    .btn-primary:hover{transform:translateY(-1px) scale(1.01);box-shadow:0 26px 60px rgba(37,99,235,0.8);}
-    .btn-ghost{
-      border-radius:999px;border:1px dashed rgba(148,163,184,0.9);
-      background:rgba(15,23,42,0.8);
-      color:var(--text-muted);
-      padding:9px 16px;font-size:12px;cursor:pointer;
-      display:inline-flex;align-items:center;gap:8px;
-      transition:all .25s ease;
+    /* Slides Container */
+    .slides-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
     }
-    .btn-ghost:hover{
-      border-style:solid;
-      border-color:rgba(148,163,184,1);
-      color:#e5e7eb;
-      background:rgba(15,23,42,0.95);
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
     }
-
-    .hero-visual{position:relative;min-height:260px;}
-    .hero-card{border-radius:22px;padding:16px 16px 14px;position:relative;overflow:hidden;}
-    .hero-card::before{
-      content:'';position:absolute;inset:-1px;
-      background:linear-gradient(135deg,rgba(148,163,184,0.45),rgba(168,85,247,0.9));
-      opacity:0.28;mix-blend-mode:screen;pointer-events:none;
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
-    .hero-screen{
-      position:relative;border-radius:16px;overflow:hidden;
-      background:radial-gradient(circle at 20% 0,#020617,#020617 55%,#1f2937 100%);
-      border:1px solid rgba(148,163,184,0.6);
+    .slide.prev {
+      transform: translateY(-100%);
     }
-    .hero-wave{
-      position:absolute;left:-5%;right:-5%;bottom:-26%;
-      height:60%;
-      background:radial-gradient(circle at 50% 0,#1d4ed8 0,#1d4ed8 25%,transparent 60%);
-      opacity:0.8;filter:blur(26px);
-      animation:waveDrift 8s ease-in-out infinite alternate;
+    /* Ambient Glow */
+    .ambient-glow {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, hsl(var(--chrome) / 0.08), transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
     }
-    @keyframes waveDrift{
-      0%{transform:translateX(-10px);}
-      100%{transform:translateX(10px);}
+    /* Glass Panels */
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
-    .hero-bars{
-      display:flex;align-items:flex-end;gap:6px;height:130px;padding:16px;
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .bar{
-      flex:1;border-radius:999px;background:linear-gradient(180deg,#e5e7eb,#3b82f6);
-      box-shadow:0 0 18px rgba(37,99,235,0.9);
-      opacity:0.95;transform-origin:bottom center;
-      animation:beat 1.7s ease-in-out infinite;
+    .glass-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
     }
-    .bar:nth-child(2){animation-delay:.12s;}
-    .bar:nth-child(3){animation-delay:.24s;}
-    .bar:nth-child(4){animation-delay:.36s;}
-    .bar:nth-child(5){animation-delay:.48s;}
-    @keyframes beat{
-      0%,100%{transform:scaleY(.5);}
-      40%{transform:scaleY(1);}
-      60%{transform:scaleY(.7);}
+    /* Text Gradients */
+    .text-gradient {
+      background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--chrome)), hsl(var(--foreground)));
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 8s ease-in-out infinite;
     }
-    .hero-meta{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:10px 14px 4px;font-size:11px;color:var(--text-muted);
+    .text-gradient-subtle {
+      background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--chrome)));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .meta-pill{
-      padding:4px 8px;border-radius:999px;
-      background:rgba(15,23,42,0.96);
-      border:1px solid rgba(148,163,184,0.8);
-      display:flex;align-items:center;gap:6px;
+    .text-chrome {
+      color: hsl(var(--chrome));
     }
-    .meta-dot{
-      width:7px;height:7px;border-radius:999px;
-      background:#22c55e;box-shadow:0 0 12px rgba(34,197,94,0.9);
+    .text-muted {
+      color: hsl(var(--muted-foreground));
     }
-    .hero-floating-card{
-      position:absolute;right:-18px;bottom:-10px;width:150px;border-radius:18px;
-      border:1px solid rgba(148,163,184,0.7);
-      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(15,23,42,0.9));
-      padding:10px 12px;
-      box-shadow:0 18px 36px rgba(15,23,42,1);
-      animation:floatUpDown 5s ease-in-out infinite;
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
-    @keyframes floatUpDown{
-      0%,100%{transform:translateY(0);}
-      50%{transform:translateY(-8px);}
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
     }
-    .hero-floating-card h4{font-size:11px;margin-bottom:2px;}
-    .hero-floating-card p{font-size:10px;color:var(--text-muted);}
-
-    .section-title{font-size:24px;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;}
-    .section-sub{font-size:13px;color:var(--text-muted);margin-bottom:18px;}
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-      gap:22px;
+    .animate-pulse-subtle {
+      animation: pulse-subtle 4s ease-in-out infinite;
     }
-    .card{
-      position:relative;border-radius:20px;padding:16px 16px 14px;overflow:hidden;
+    /* Buttons */
+    .btn {
+      padding: 0.875rem 2rem;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .card::before{
-      content:'';position:absolute;inset:-1px;
-      background:linear-gradient(145deg,rgba(148,163,184,0.45),rgba(168,85,247,0.95));
-      opacity:0;transition:opacity .3s ease;
+    .btn-primary {
+      background: hsl(var(--foreground));
+      color: hsl(var(--background));
+      border: none;
     }
-    .card:hover::before{opacity:0.18;}
-    .card-inner{position:relative;z-index:1;}
-
-    .video-card-thumb{
-      position:relative;
-      border-radius:14px;
-      overflow:hidden;
-      margin-bottom:10px;
-      border:1px solid rgba(148,163,184,0.7);
-      background:#020617;
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
     }
-    .video-card-thumb video{
-      width:100%;
-      display:block;
-      filter:grayscale(100%) contrast(1.1);
-      transition:filter .25s ease, transform .25s ease;
+    .btn-secondary {
+      background: transparent;
+      color: hsl(var(--foreground));
+      border: 1px solid hsl(var(--border));
     }
-    .video-card-thumb::after{
-      content:'Preview';
-      position:absolute;
-      bottom:8px;right:10px;
-      font-size:10px;
-      padding:3px 8px;
-      border-radius:999px;
-      background:rgba(15,23,42,0.9);
-      border:1px solid rgba(148,163,184,0.9);
-      color:#e5e7eb;
+    .btn-secondary:hover {
+      background: hsl(var(--muted));
+      border-color: hsl(var(--muted-foreground));
     }
-    .card:hover .video-card-thumb video{
-      filter:grayscale(0%) contrast(1.03);
-      transform:scale(1.03);
+    /* Section Label */
+    .section-label {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
     }
-
-    .badge-role{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:4px 9px;border-radius:999px;
-      border:1px solid rgba(148,163,184,0.9);
-      font-size:10px;text-transform:uppercase;letter-spacing:0.16em;
-      color:#e5e7eb;margin-bottom:10px;
+    /* Hero Slide */
+    .hero-content {
+      text-align: center;
+      max-width: 56rem;
+      padding: 0 1.5rem;
     }
-    .skill-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-    .tag{
-      font-size:10px;padding:3px 7px;border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      border:1px solid rgba(148,163,184,0.8);
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
     }
-
-    .filter-bar{
-      display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: hsl(var(--muted-foreground));
+      max-width: 36rem;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
     }
-    .filter-chip{
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.8);
-      background:rgba(15,23,42,0.9);
-      font-size:11px;
-      color:var(--text-muted);
-      cursor:pointer;
-      display:flex;align-items:center;gap:6px;
-      transition:all .2s ease;
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
     }
-    .filter-chip span.icon{
-      display:inline-flex;align-items:center;justify-content:center;
-      width:14px;height:14px;border-radius:999px;
-      border:1px solid rgba(148,163,184,0.9);
-      font-size:9px;
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 72rem;
+      width: 100%;
+      padding: 0 1.5rem;
     }
-    .filter-chip.active{
-      color:#f9fafb;
-      border-color:var(--accent-strong);
-      background:rgba(15,23,42,1);
-      box-shadow:0 0 22px rgba(168,85,247,0.6);
-      animation:chipRotate 0.35s ease-out;
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    @keyframes chipRotate{
-      0%{transform:rotate(-8deg) scale(0.96);}
-      50%{transform:rotate(3deg) scale(1.02);}
-      100%{transform:rotate(0deg) scale(1);}
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
-    .filter-chip.active span.icon{
-      animation:iconSpin 2.3s linear infinite;
+    .service-card {
+      padding: 2rem;
+      border-radius: 1rem;
     }
-    @keyframes iconSpin{
-      0%{transform:rotate(0deg);}
-      100%{transform:rotate(360deg);}
+    .service-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 0.75rem;
+      background: hsl(var(--muted) / 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
     }
-
-    .budget-pill{
-      font-size:11px;padding:4px 9px;border-radius:999px;
-      background:rgba(37,99,235,0.08);
-      border:1px solid rgba(59,130,246,0.85);
-      color:#bfdbfe;
-      display:inline-flex;align-items:center;gap:6px;
+    .service-icon svg {
+      width: 1.75rem;
+      height: 1.75rem;
+      stroke: hsl(var(--foreground));
     }
-    .badge-type{
-      font-size:10px;padding:3px 7px;border-radius:999px;
-      border:1px solid rgba(148,163,184,0.9);
-      text-transform:uppercase;letter-spacing:0.14em;
-      color:var(--text-muted);
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
     }
-
-    .timeline{border-left:1px solid rgba(148,163,184,0.8);padding-left:18px;margin-top:10px;}
-    .tl-item{margin-bottom:16px;position:relative;}
-    .tl-item::before{
-      content:'';position:absolute;left:-10px;top:4px;width:9px;height:9px;border-radius:999px;background:#e5e7eb;box-shadow:0 0 14px rgba(148,163,184,1);
+    .service-desc {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+      line-height: 1.6;
     }
-    .tl-item h4{font-size:12px;margin-bottom:3px;}
-    .tl-item p{font-size:11px;color:var(--text-muted);}
-
-    .auth-layout{max-width:760px;margin:40px auto 0;display:grid;grid-template-columns:1.25fr 1fr;gap:30px;}
-    .auth-panel{border-radius:26px;padding:24px 22px 22px;position:relative;overflow:hidden;}
-    .auth-toggle{display:inline-flex;border-radius:999px;padding:3px;background:rgba(15,23,42,0.96);border:1px solid rgba(148,163,184,0.9);margin-bottom:18px;}
-    .auth-toggle button{flex:1;border:none;border-radius:999px;padding:6px 14px;font-size:12px;cursor:pointer;background:transparent;color:var(--text-muted);transition:all .25s ease;}
-    .auth-toggle button.active{background:radial-gradient(circle at 10% 0,#e0f2fe,#3b82f6);color:#020617;box-shadow:0 0 18px rgba(37,99,235,0.8);}
-    form .field{margin-bottom:12px;}
-    label{display:block;font-size:11px;margin-bottom:4px;color:var(--text-muted);}
-    input, textarea{
-      width:100%;border-radius:12px;border:1px solid rgba(148,163,184,0.85);
-      padding:9px 13px;font-size:12px;background:rgba(15,23,42,0.96);
-      color:var(--text-main);outline:none;transition:border-color .2s,box-shadow .2s;
-      font-family:'Poppins',sans-serif;
+    /* Why Choose Us */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 56rem;
+      width: 100%;
+      padding: 0 1.5rem;
     }
-    textarea{min-height:110px;resize:vertical;}
-    input:focus, textarea:focus{border-color:var(--accent);box-shadow:0 0 18px rgba(168,85,247,0.9);}
-    .radio-row{display:flex;gap:12px;font-size:11px;margin-top:4px;}
-    .radio-row label{display:flex;align-items:center;gap:6px;margin-bottom:0;}
-
-    p{font-size:12px;line-height:1.6;}
-    @media(max-width:960px){
-      .hero-grid{grid-template-columns:1fr;}
-      .auth-layout{grid-template-columns:1fr;}
-      .hero-visual{order:-1;margin-bottom:20px;}
+    @media (min-width: 768px) {
+      .reasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    @media(max-width:640px){
-      .nav-inner{flex-wrap:wrap;gap:10px;}
-      .nav-links{order:2;width:100%;justify-content:space-between;}
-      .hero-grid{margin-top:26px;}
+    .reason-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .reason-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .reason-item:hover .reason-icon {
+      transform: scale(1.1);
+    }
+    .reason-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke: hsl(var(--foreground));
+    }
+    .reason-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .reason-desc {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+    }
+    .trust-badge {
+      margin-top: 3rem;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+    }
+    .trust-badge span {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+    }
+    /* Workflow */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 72rem;
+      width: 100%;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width: 1024px) {
+      .workflow-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    .workflow-card {
+      position: relative;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+    }
+    .workflow-number {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: hsl(var(--chrome));
+      opacity: 0.3;
+    }
+    .workflow-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 0.75rem;
+      background: hsl(var(--muted) / 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .workflow-icon svg {
+      width: 2rem;
+      height: 2rem;
+      stroke: hsl(var(--foreground));
+    }
+    .workflow-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .workflow-desc {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+    }
+    /* About Card */
+    .about-card {
+      max-width: 48rem;
+      padding: 3rem 4rem;
+      border-radius: 1.5rem;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      .about-card {
+        padding: 2rem;
+        margin: 0 1rem;
+      }
+    }
+    .about-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+    .about-text {
+      color: hsl(var(--muted-foreground));
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .about-text strong {
+      color: hsl(var(--foreground));
+      font-weight: 500;
+    }
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid hsl(var(--border) / 0.3);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: hsl(var(--chrome));
+    }
+    .stat-label {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+    /* CTA Slide */
+    .cta-content {
+      text-align: center;
+      max-width: 48rem;
+      padding: 0 1.5rem;
+    }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    .cta-subtitle {
+      color: hsl(var(--muted-foreground));
+      font-size: 1.125rem;
+      margin-bottom: 2.5rem;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 4rem;
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-radius: 9999px;
+    }
+    .contact-item svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: hsl(var(--foreground));
+    }
+    .contact-item span {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+    }
+    /* Section Title */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      font-weight: 600;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.6;
+    }
+    .scroll-hint span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: hsl(var(--muted-foreground));
+    }
+    .scroll-arrow {
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke: hsl(var(--muted-foreground));
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(8px); }
+      60% { transform: translateY(4px); }
+    }
+    @media (max-width: 1024px) {
+      .scroll-hint {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-<div class="animated-bg"></div>
-<div class="bg-orbit">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-</div>
-
-<div class="page-wrap">
-  <nav>
-    <div class="nav-inner">
-      <a class="logo-link" onclick="showPage('home')">
-        <div class="logo-icon-wrap">
-          <img src="logo.png" alt="SB WORKFLOW Logo">
-        </div>
-        <span class="logo-text">SB WORKFLOW</span>
-      </a>
-      <div class="nav-links">
-        <button data-page="home" class="active"><span>Home</span></button>
-        <button data-page="editors"><span>Work</span></button>
-        <button data-page="projects"><span>Services</span></button>
-        <button data-page="about"><span>About</span></button>
-        <button data-page="contact"><span>Contact</span></button>
-        <button data-page="auth"><span>Login • Register</span></button>
-      </div>
-      <div class="nav-cta">
-        <div class="pill-status">Delhi • Remote</div>
-        <button class="btn-outline" id="ctaHire">
-          <span>Book a project</span>
-          <span>↗</span>
-        </button>
-      </div>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <span class="logo-text">SB WORKFLOW</span>
     </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a class="nav-link active" data-slide="0">Home</a></li>
+        <li><a class="nav-link" data-slide="1">About</a></li>
+        <li><a class="nav-link" data-slide="2">Services</a></li>
+        <li><a class="nav-link" data-slide="3">Why Us</a></li>
+        <li><a class="nav-link" data-slide="4">Process</a></li>
+        <li><a class="nav-link" data-slide="5">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Slide Navigation -->
+  <nav class="slide-nav">
+    <button class="slide-nav-item active" data-slide="0">
+      <span class="slide-nav-label">Home</span>
+      <div class="slide-nav-dot"></div>
+    </button>
+    <button class="slide-nav-item" data-slide="1">
+      <span class="slide-nav-label">About</span>
+      <div class="slide-nav-dot"></div>
+    </button>
+    <button class="slide-nav-item" data-slide="2">
+      <span class="slide-nav-label">Services</span>
+      <div class="slide-nav-dot"></div>
+    </button>
+    <button class="slide-nav-item" data-slide="3">
+      <span class="slide-nav-label">Why Us</span>
+      <div class="slide-nav-dot"></div>
+    </button>
+    <button class="slide-nav-item" data-slide="4">
+      <span class="slide-nav-label">Process</span>
+      <div class="slide-nav-dot"></div>
+    </button>
+    <button class="slide-nav-item" data-slide="5">
+      <span class="slide-nav-label">Contact</span>
+      <div class="slide-nav-dot"></div>
+    </button>
   </nav>
-
-  <main>
-    <!-- HOME -->
-    <section id="page-home" class="page active">
-      <div class="hero-grid glass">
-        <div style="padding:22px;">
-          <div class="hero-kicker">
-            <span class="badge">SB WORKFLOW</span>
-            <span>Video editing & motion</span>
-          </div>
-          <h1>Professional edits that turn raw footage into results.</h1>
-          <p class="hero-sub">
-            SB WORKFLOW helps creators and brands turn streams, podcasts, and raw footage into clean, ready-to-publish content with a focus on pacing, clarity, and story.[web:77][web:87]
-          </p>
-          <div class="hero-actions">
-            <button class="btn-primary" data-jump="editors">
-              <span>View selected work</span>
-              <span>▶</span>
-            </button>
-            <button class="btn-ghost" data-jump="projects">
-              <span>View services & pricing</span>
-              <span>⟲</span>
-            </button>
-          </div>
-          <p style="font-size:11px;color:var(--text-muted);">
-            Specialized in Podcast, Vlog, Gaming, Documentary, Shorts, 2D/3D Animation, and Thumbnail Designers for YouTube and Social platforms.
-          </p>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-card glass">
-            <div class="hero-screen">
-              <div class="hero-bars">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-              </div>
-              <div class="hero-wave"></div>
-              <div class="hero-meta">
-                <div class="meta-pill">
-                  <span class="meta-dot"></span>
-                  <span>Current edit queue</span>
-                </div>
-                <span>3 projects • 2 platforms</span>
-              </div>
-            </div>
-          </div>
-          <div class="hero-floating-card">
-            <h4>Turnaround window</h4>
-            <p>Short-form: 24–48 hrs • Long-form: 3–7 days (depending on brief).</p>
-          </div>
+  <!-- Mobile Indicator -->
+  <div class="mobile-indicator">
+    <button class="mobile-dot active" data-slide="0"></button>
+    <button class="mobile-dot" data-slide="1"></button>
+    <button class="mobile-dot" data-slide="2"></button>
+    <button class="mobile-dot" data-slide="3"></button>
+    <button class="mobile-dot" data-slide="4"></button>
+    <button class="mobile-dot" data-slide="5"></button>
+  </div>
+  <!-- Slides Container -->
+  <div class="slides-container">
+    <!-- Slide 0: Hero -->
+    <section class="slide active" id="slide-0">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 600px; height: 600px; top: 20%; left: 10%;"></div>
+      <div class="ambient-glow animate-pulse-subtle" style="width: 400px; height: 400px; bottom: 10%; right: 15%; animation-delay: -2s;"></div>
+      
+      <div class="hero-content">
+        <span class="section-label">Premium Creative Studio</span>
+        <h1 class="hero-title text-gradient">SB WORKFLOW COMPANY</h1>
+        <p class="hero-subtitle">We craft visual experiences that convert. World-class editing, animation, and design solutions for modern brands.</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary">
+            Start a Project
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="btn btn-secondary">View Our Work</a>
         </div>
       </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </div>
     </section>
-
-    <!-- WORK -->
-    <section id="page-editors" class="page">
-      <div class="glass" style="padding:22px 22px 20px;">
-        <h2 class="section-title">Selected work</h2>
-        <p class="section-sub">
-          Filter by category and explore a curated set of projects instead of a long, unfocused list.[web:20][web:81]
+    <!-- Slide 1: About -->
+    <section class="slide" id="slide-1">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+      
+      <span class="section-label">Who We Are</span>
+      <div class="about-card glass-panel">
+        <h2 class="about-title text-gradient-subtle">A Premium Creative Studio</h2>
+        <p class="about-text">
+          <strong>SB WORKFLOW COMPANY</strong> is a premium creative studio delivering world-class editing, animation, and design solutions for modern brands and creators. We transform visions into visual masterpieces that captivate audiences and drive results.
         </p>
-
-        <div class="filter-bar" id="editorFilterBar">
-          <div class="filter-chip active" data-filter="all"><span class="icon">★</span><span>All</span></div>
-          <div class="filter-chip" data-filter="podcast"><span class="icon">🎙</span><span>Podcast</span></div>
-          <div class="filter-chip" data-filter="vlog"><span class="icon">🎥</span><span>Vlog</span></div>
-          <div class="filter-chip" data-filter="gaming"><span class="icon">🎮</span><span>Gaming</span></div>
-          <div class="filter-chip" data-filter="documentary"><span class="icon">📽</span><span>Documentary</span></div>
-          <div class="filter-chip" data-filter="shorts"><span class="icon">▶</span><span>Shorts</span></div>
-          <div class="filter-chip" data-filter="3d"><span class="icon">3D</span><span>3D Animation</span></div>
-          <div class="filter-chip" data-filter="2d"><span class="icon">2D</span><span>2D Animation</span></div>
-          <div class="filter-chip" data-filter="thumbnail"><span class="icon">🖼</span><span>Thumbnail</span></div>
-        </div>
-
-        <div class="grid" id="editorGrid">
-          <article class="card glass editor-item" data-category="gaming shorts vlog">
-            <div class="card-inner">
-              <div class="badge-role">Highlight reel • Gaming</div>
-              <div class="video-card-thumb">
-                <video class="preview-video" muted preload="metadata" loop>
-                  <source src="videos/portfolio-gaming-main.mp4" type="video/mp4">
-                </video>
-              </div>
-              <h3 style="font-size:14px;margin-bottom:4px;">Creator showreel</h3>
-              <p>High-energy montage built from streams and clips, optimized for YouTube and short-form platforms.</p>
-              <div class="skill-tags">
-                <span class="tag">Showreel</span><span class="tag">Gaming</span><span class="tag">Shorts</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="card glass editor-item" data-category="podcast shorts">
-            <div class="card-inner">
-              <div class="badge-role">Podcast • Multicam</div>
-              <div class="video-card-thumb">
-                <video class="preview-video" muted preload="metadata" loop>
-                  <source src="videos/portfolio-podcast.mp4" type="video/mp4">
-                </video>
-              </div>
-              <h3 style="font-size:14px;margin-bottom:4px;">Long-form show + clips</h3>
-              <p>Full-length episode with clean cuts plus a batch of short clips ready for YouTube Shorts and Reels.</p>
-              <div class="skill-tags">
-                <span class="tag">Podcast</span><span class="tag">Captions</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="card glass editor-item" data-category="2d 3d thumbnail">
-            <div class="card-inner">
-              <div class="badge-role">2D / 3D animation</div>
-              <div class="video-card-thumb">
-                <video class="preview-video" muted preload="metadata" loop>
-                  <source src="videos/portfolio-animation.mp4" type="video/mp4">
-                </video>
-              </div>
-              <h3 style="font-size:14px;margin-bottom:4px;">Brand animation kit</h3>
-              <p>Logo stings, lower thirds, and thumbnail frames that keep a consistent visual system across all content.</p>
-              <div class="skill-tags">
-                <span class="tag">2D</span><span class="tag">3D</span><span class="tag">Thumbnails</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="page-projects" class="page">
-      <div class="glass" style="padding:22px 22px 20px;">
-        <h2 class="section-title">Services</h2>
-        <p class="section-sub">
-          Clear packages and expectations help clients decide faster and avoid back‑and‑forth on basics.[web:86][web:87]
-        </p>
-        <div class="grid">
-          <article class="card glass">
-            <div class="card-inner">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                <span class="budget-pill"><span>From ₹200</span><span>•</span><span>Per video</span></span>
-                <span class="badge-type">Short‑form</span>
-              </div>
-              <h3 style="font-size:14px;margin-bottom:4px;">Shorts / Reels package</h3>
-              <p>Hook‑focused edits, subtitles, sound design, and export presets for YouTube Shorts, Reels, and TikTok.</p>
-            </div>
-          </article>
-          <article class="card glass">
-            <div class="card-inner">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                <span class="budget-pill"><span>Custom</span><span>•</span><span>Per project</span></span>
-                <span class="badge-type">Long‑form</span>
-              </div>
-              <h3 style="font-size:14px;margin-bottom:4px;">YouTube / documentary edit</h3>
-              <p>End‑to‑end edit including structure, pacing, color tweaks, graphics, and thumbnail direction.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="page-about" class="page">
-      <div class="glass" style="padding:22px 22px 20px;">
-        <h2 class="section-title">About</h2>
-        <p class="section-sub">
-          A focused portfolio that shows only relevant, up‑to‑date work looks more professional than a crowded archive.[web:20][web:87]
-        </p>
-        <div class="timeline">
-          <div class="tl-item">
-            <h4>Background</h4>
-            <p>Android developer turned editor, combining technical mindset with storytelling and channel growth thinking.</p>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Projects Delivered</div>
           </div>
-          <div class="tl-item">
-            <h4>Approach</h4>
-            <p>Clean structure, consistent branding, and fast iteration based on feedback instead of heavy, one‑shot deliveries.</p>
+          <div class="stat-item">
+            <div class="stat-value">25+</div>
+            <div class="stat-label">Happy Clients</div>
           </div>
-          <div class="tl-item">
-            <h4>Next steps</h4>
-            <p>Adding case studies, testimonials, and client logos as projects grow to keep the site small but high impact.</p>
+          <div class="stat-item">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Years Experience</div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- CONTACT -->
-    <section id="page-contact" class="page">
-      <div class="glass" style="padding:22px 22px 20px;max-width:760px;margin:0 auto;">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-sub">
-          A simple contact form plus direct email makes it easy for clients to reach out without friction.[web:99][web:104][web:107]
-        </p>
-
-        <form id="contact-form">
-          <div class="field">
-            <label for="contact-name">Name</label>
-            <input id="contact-name" type="text" name="name" required placeholder="Your name" />
+    <!-- Slide 2: Services -->
+    <section class="slide" id="slide-2">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 400px; height: 400px; top: 80px; right: 80px;"></div>
+      <div class="ambient-glow animate-pulse-subtle" style="width: 300px; height: 300px; bottom: 80px; left: 80px; animation-delay: -2s;"></div>
+      
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title text-gradient-subtle">Our Services</h2>
+      
+      <div class="services-grid">
+        <div class="service-card glass-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
           </div>
-          <div class="field">
-            <label for="contact-email">Email</label>
-            <input id="contact-email" type="email" name="email" required placeholder="you@example.com" />
+          <h3 class="service-title">3D & 2D Animation</h3>
+          <p class="service-desc">Stunning animated visuals that bring your ideas to life</p>
+        </div>
+        
+        <div class="service-card glass-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m10 8 4 4-4 4"/></svg>
           </div>
-          <div class="field">
-            <label for="contact-type">Project type</label>
-            <input id="contact-type" type="text" name="type" placeholder="e.g. Gaming highlights, Podcast, YouTube series" />
+          <h3 class="service-title">Video Editing</h3>
+          <p class="service-desc">Reels, YouTube, Ads & Films crafted to perfection</p>
+        </div>
+        
+        <div class="service-card glass-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 4-4 4 4"/><path d="M4 4v16h16"/><path d="m4 20 4-4 4 4"/><path d="M20 4v12a4 4 0 0 1-4 4H4"/></svg>
           </div>
-          <div class="field">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="message" required placeholder="Share links, deadlines, and any references you like."></textarea>
+          <h3 class="service-title">Motion Graphics</h3>
+          <p class="service-desc">Dynamic visual effects that captivate audiences</p>
+        </div>
+        
+        <div class="service-card glass-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/></svg>
           </div>
-          <button type="submit" class="btn-primary" style="margin-top:8px;justify-content:center;width:100%;">
-            <span>Send message</span>
-          </button>
-        </form>
-
-        <div style="margin-top:18px;font-size:11px;color:var(--text-muted);display:grid;gap:4px;">
-          <span><strong>Direct email:</strong> youremail@example.com</span>
-          <span><strong>Preferred contact:</strong> Email or WhatsApp for brief details, Discord for live feedback calls.</span>
-          <span><strong>Reply time:</strong> Within 24 hours on weekdays.</span>
+          <h3 class="service-title">Graphic Designing</h3>
+          <p class="service-desc">Premium designs that elevate your brand identity</p>
+        </div>
+        
+        <div class="service-card glass-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
+          </div>
+          <h3 class="service-title">Visual Effects</h3>
+          <p class="service-desc">Creative manipulation that transforms reality</p>
         </div>
       </div>
     </section>
-
-    <!-- AUTH -->
-    <section id="page-auth" class="page">
-      <div class="auth-layout">
-        <div class="auth-panel glass">
-          <div class="auth-toggle">
-            <button id="tab-login" class="active">Login</button>
-            <button id="tab-register">Register</button>
+    <!-- Slide 3: Why Choose Us -->
+    <section class="slide" id="slide-3">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;"></div>
+      
+      <span class="section-label">Why Us</span>
+      <h2 class="section-title text-gradient-subtle">Why Choose SB Workflow</h2>
+      
+      <div class="reasons-grid">
+        <div class="reason-item">
+          <div class="reason-icon glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
           </div>
-          <form id="form-login">
-            <div class="field">
-              <label>Email</label>
-              <input type="email" required placeholder="you@example.com" />
-            </div>
-            <div class="field">
-              <label>Password</label>
-              <input type="password" required placeholder="••••••••" />
-            </div>
-            <button type="submit" class="btn-primary" style="margin-top:8px;width:100%;justify-content:center;">
-              <span>Continue</span>
-            </button>
-          </form>
-
-          <form id="form-register" style="display:none;">
-            <div class="field">
-              <label>Full name</label>
-              <input type="text" required placeholder="Your name" />
-            </div>
-            <div class="field">
-              <label>Email</label>
-              <input type="email" required placeholder="you@example.com" />
-            </div>
-            <div class="field">
-              <label>Password</label>
-              <input type="password" required placeholder="Create a password" />
-            </div>
-            <div class="field">
-              <label>Account type</label>
-              <div class="radio-row">
-                <label><input type="radio" name="role" value="editor" checked /> Editor</label>
-                <label><input type="radio" name="role" value="client" /> Client</label>
-              </div>
-            </div>
-            <button type="submit" class="btn-primary" style="margin-top:8px;width:100%;justify-content:center;">
-              <span>Create account</span>
-            </button>
-          </form>
-        </div>
-
-        <div class="auth-panel glass" style="display:flex;flex-direction:column;justify-content:space-between;">
           <div>
-            <h3 style="font-size:16px;margin-bottom:6px;">Why accounts?</h3>
-            <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">
-              Use this section later for client dashboards, upload links, or private review pages if you connect a backend.[web:86]
-            </p>
-            <ul style="font-size:11px;color:var(--text-muted);list-style:disc;margin-left:16px;display:grid;gap:6px;">
-              <li>Connect to Firebase or your own API.</li>
-              <li>Role‑based flows for editors and clients.</li>
-              <li>Room for messaging, invoices, and feedback links.</li>
-            </ul>
+            <h3 class="reason-title">Industry-Level Quality</h3>
+            <p class="reason-desc">Global standards in every frame</p>
           </div>
-          <p style="margin-top:18px;font-size:11px;color:var(--text-muted);">
-            For now this is a static demo, ready for you to wire into authentication when needed.
-          </p>
+        </div>
+        
+        <div class="reason-item">
+          <div class="reason-icon glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <h3 class="reason-title">Fast & Reliable Delivery</h3>
+            <p class="reason-desc">On-time, every time</p>
+          </div>
+        </div>
+        
+        <div class="reason-item">
+          <div class="reason-icon glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h3 class="reason-title">Indian Market Expertise</h3>
+            <p class="reason-desc">We understand your audience</p>
+          </div>
+        </div>
+        
+        <div class="reason-item">
+          <div class="reason-icon glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m10 8 4 4-4 4"/></svg>
+          </div>
+          <div>
+            <h3 class="reason-title">Premium Visual Storytelling</h3>
+            <p class="reason-desc">Stories that resonate & convert</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="trust-badge glass-panel">
+        <span>Trusted by <strong style="color: hsl(var(--foreground)); font-weight: 500;">25+ brands</strong> across India</span>
+      </div>
+    </section>
+    <!-- Slide 4: Workflow -->
+    <section class="slide" id="slide-4">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 400px; height: 400px; top: 0; left: 25%; opacity: 0.1;"></div>
+      
+      <span class="section-label">Our Process</span>
+      <h2 class="section-title text-gradient-subtle">How We Work</h2>
+      
+      <div class="workflow-grid">
+        <div class="workflow-card glass-card">
+          <span class="workflow-number">01</span>
+          <div class="workflow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          </div>
+          <h3 class="workflow-title">Concept</h3>
+          <p class="workflow-desc">We discuss your vision and goals</p>
+        </div>
+        
+        <div class="workflow-card glass-card">
+          <span class="workflow-number">02</span>
+          <div class="workflow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <h3 class="workflow-title">Design</h3>
+          <p class="workflow-desc">Creating the visual blueprint</p>
+        </div>
+        
+        <div class="workflow-card glass-card">
+          <span class="workflow-number">03</span>
+          <div class="workflow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 4-4 4 4"/><path d="M4 4v16h16"/><path d="m4 20 4-4 4 4"/><path d="M20 4v12a4 4 0 0 1-4 4H4"/></svg>
+          </div>
+          <h3 class="workflow-title">Edit</h3>
+          <p class="workflow-desc">Crafting every frame with precision</p>
+        </div>
+        
+        <div class="workflow-card glass-card">
+          <span class="workflow-number">04</span>
+          <div class="workflow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="workflow-title">Delivery</h3>
+          <p class="workflow-desc">Polished & ready for the world</p>
         </div>
       </div>
     </section>
-  </main>
-</div>
-
-<script>
-  const navButtons = document.querySelectorAll('.nav-links button');
-  const pages = document.querySelectorAll('.page');
-  function showPage(id){
-    pages.forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    navButtons.forEach(b => b.classList.toggle('active', b.dataset.page === id));
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-  navButtons.forEach(btn=>{
-    btn.addEventListener('click',()=>showPage(btn.dataset.page));
-  });
-  document.querySelectorAll('[data-jump]').forEach(btn=>{
-    btn.addEventListener('click',()=>showPage(btn.dataset.jump));
-  });
-  document.getElementById('ctaHire').addEventListener('click',()=>showPage('contact'));
-
-  const tabLogin = document.getElementById('tab-login');
-  const tabRegister = document.getElementById('tab-register');
-  const formLogin = document.getElementById('form-login');
-  const formRegister = document.getElementById('form-register');
-  tabLogin.addEventListener('click',()=>{
-    tabLogin.classList.add('active');
-    tabRegister.classList.remove('active');
-    formLogin.style.display='block';
-    formRegister.style.display='none';
-  });
-  tabRegister.addEventListener('click',()=>{
-    tabRegister.classList.add('active');
-    tabLogin.classList.remove('active');
-    formRegister.style.display='block';
-    formLogin.style.display='none';
-  });
-  formLogin.addEventListener('submit',e=>{
-    e.preventDefault();
-    alert('Logged in (demo). Connect this to Firebase or your backend.');
-  });
-  formRegister.addEventListener('submit',e=>{
-    e.preventDefault();
-    alert('Account created (demo). Save to database here.');
-  });
-
-  const previewVideos = document.querySelectorAll('.preview-video');
-  previewVideos.forEach(video=>{
-    video.addEventListener('mouseenter',()=>{
-      video.currentTime = 0;
-      video.play();
-    });
-    video.addEventListener('mouseleave',()=>{
-      video.pause();
-      video.currentTime = 0;
-    });
-    video.addEventListener('click',()=>{
-      if(video.paused){ video.play(); } else { video.pause(); }
-    });
-  });
-
-  const chips = document.querySelectorAll('.filter-chip');
-  const items = document.querySelectorAll('.editor-item');
-  chips.forEach(chip=>{
-    chip.addEventListener('click',()=>{
-      const filter = chip.dataset.filter;
-      chips.forEach(c=>c.classList.remove('active'));
-      chip.classList.add('active');
-      items.forEach(item=>{
-        if(filter === 'all'){
-          item.style.display = 'block';
-        } else {
-          const cats = (item.dataset.category || '').toLowerCase();
-          item.style.display = cats.includes(filter) ? 'block' : 'none';
+    <!-- Slide 5: CTA -->
+    <section class="slide" id="slide-5">
+      <div class="ambient-glow animate-pulse-subtle" style="width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+      
+      <div class="cta-content">
+        <span class="section-label">Let's Connect</span>
+        <h2 class="cta-title text-gradient">Let's Build Something Powerful Together</h2>
+        <p class="cta-subtitle">Ready to transform your vision into reality? Get in touch today.</p>
+        
+        <div class="cta-buttons">
+          <a href="mailto:garvagarwal03@gmail.com" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Contact Us
+          </a>
+          <a href="https://wa.me/919542785647" target="_blank" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+        
+        <div class="contact-info">
+          <div class="contact-item glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+91 9542785647</span>
+          </div>
+          <div class="contact-item glass-panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>garvagarwal03@gmail.com</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Slide Navigation
+    let currentSlide = 0;
+    const totalSlides = 6;
+    let isAnimating = false;
+    function navigateToSlide(index) {
+      if (isAnimating || index === currentSlide || index < 0 || index >= totalSlides) return;
+      
+      isAnimating = true;
+      const direction = index > currentSlide ? 1 : -1;
+      
+      // Update slides
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev');
+        if (i === index) {
+          slide.classList.add('active');
+        } else if (i < index) {
+          slide.classList.add('prev');
         }
       });
+      
+      // Update navigation
+      document.querySelectorAll('.slide-nav-item').forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+      
+      document.querySelectorAll('.nav-link').forEach((link, i) => {
+        link.classList.toggle('active', i === index);
+      });
+      
+      document.querySelectorAll('.mobile-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      
+      currentSlide = index;
+      
+      setTimeout(() => {
+        isAnimating = false;
+      }, 800);
+    }
+    // Click handlers
+    document.querySelectorAll('[data-slide]').forEach(el => {
+      el.addEventListener('click', () => {
+        const slideIndex = parseInt(el.getAttribute('data-slide'));
+        navigateToSlide(slideIndex);
+      });
     });
-  });
-
-  const contactForm = document.getElementById('contact-form');
-  contactForm.addEventListener('submit',e=>{
-    e.preventDefault();
-    alert('Thank you for reaching out. This demo form is ready to connect to email or an API.');
-  });
-</script>
+    // Wheel navigation
+    let wheelTimeout;
+    document.addEventListener('wheel', (e) => {
+      if (isAnimating) return;
+      
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        if (Math.abs(e.deltaY) < 50) return;
+        
+        if (e.deltaY > 0 && currentSlide < totalSlides - 1) {
+          navigateToSlide(currentSlide + 1);
+        } else if (e.deltaY < 0 && currentSlide > 0) {
+          navigateToSlide(currentSlide - 1);
+        }
+      }, 50);
+    }, { passive: true });
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (isAnimating) return;
+      
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        if (currentSlide < totalSlides - 1) navigateToSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        if (currentSlide > 0) navigateToSlide(currentSlide - 1);
+      }
+    });
+    // Touch navigation
+    let touchStartY = null;
+    
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+      if (!touchStartY || isAnimating) return;
+      
+      const touchEndY = e.changedTouches[0].clientY;
+      const diff = touchStartY - touchEndY;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentSlide < totalSlides - 1) {
+          navigateToSlide(currentSlide + 1);
+        } else if (diff < 0 && currentSlide > 0) {
+          navigateToSlide(currentSlide - 1);
+        }
+      }
+      
+      touchStartY = null;
+    });
+  </script>
 </body>
 </html>
